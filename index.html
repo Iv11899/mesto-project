@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Место</title>
+</head>
+<body class="page">
+    <header class="header">
+        <img class="header__logo" src="./images/Logo.svg" alt="Логотип Место"></img>
+    </header>
+    <main class="main">
+        <section class="profile">
+            <img class="profile__avatar" src="./images/Kusto.jpg" alt="Фото">
+            <div class="profile__info">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <p class="profile__about">Исследователь океана</p>
+                <button type="button" class="profile__edit" aria-label="редактировать профиль"></button> 
+            </div>
+            <button type="button" class="profile__add" aria-label="добавить фото"></button>
+        </section>
+        <section class="photo-grid">
+            <div class="photo-grid__item">
+                <img class="photo-grid__img" src="./images/Karachaevsk.png" alt="Карачаевск">
+                <div class="photo-grid__info">
+                    <h2 class="photo-grid__title">Карачаевск</h2>
+                    <button type="button" class="photo-grid__like"></button>
+                </div>
+            </div>
+            <div class="photo-grid__item">
+                <img class="photo-grid__img" src="./images/Elbrus.png" alt="Эльбрус">
+                <div class="photo-grid__info">
+                    <h2 class="photo-grid__title">Гора Эльбрус</h2>
+                    <button type="button" class="photo-grid__like"></button>
+                </div>
+            </div>
+            <div class="photo-grid__item">
+                <img class="photo-grid__img" src="./images/Dombai.png" alt="Домбай">
+                <div class="photo-grid__info">
+                    <h2 class="photo-grid__title">Домбай</h2>
+                    <button type="button" class="photo-grid__like"></button>
+                </div>
+            </div>
+            <div class="photo-grid__item">
+                <img class="photo-grid__img" src="./images/Elbrus.png" alt="Эльбрус">
+                <div class="photo-grid__info">
+                    <h2 class="photo-grid__title">Гора Эльбрус</h2>
+                    <button type="button" class="photo-grid__like"></button>
+                </div>
+            </div>
+            <div class="photo-grid__item">
+                <img class="photo-grid__img" src="./images/Dombai.png" alt="Домбай">
+                <div class="photo-grid__info">
+                    <h2 class="photo-grid__title">Домбай</h2>
+                    <button type="button" class="photo-grid__like"></button>
+                </div>
+            </div>
+            <div class="photo-grid__item">
+                <img class="photo-grid__img" src="./images/Karachaevsk.png" alt="Карачаево-Ч...">
+                <div class="photo-grid__info">
+                    <h2 class="photo-grid__title">Карачаево-Ч...</h2>
+                    <button type="button" class="photo-grid__like"></button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+    </footer>
+    <div class="popup">
+        <div class="popup__container">
+            <button type="button" class="popup__close"  aria-label="закрыть">Закрыть</button>
+            <form name="profile" class="form">
+                <h2 class="form__title">Редактировать профиль</h2>
+                <fieldset class="form__fieldest">
+                    <input name="name" value="Жак-Ив Кусто" type="text" class="form__input form__input_type_name">
+                    <input name="about" value="Исследователь океана" type="text" class="form__input form__input_type_about">
+                </fieldset>
+                <button type="submit" class="form__submit" aria-label="сохранить">Сохранить</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
