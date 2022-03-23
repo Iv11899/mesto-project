@@ -1,4 +1,4 @@
-.form__input {
+.popup__input {
   padding: 9px 5px 9px;
   border: none;
   margin-bottom: 20px;
@@ -10,12 +10,12 @@
   box-sizing: border-box;
 }
 
-.form__input:last-child {
+.popup__input:last-child {
   margin-bottom: 0;
 }
 
 @media (max-width: 650px) {
-  .form__input {
+  .popup__input {
     width: 238px;
   }
 }
