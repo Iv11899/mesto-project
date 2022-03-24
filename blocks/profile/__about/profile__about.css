@@ -8,12 +8,12 @@
   color: #ffffff;
   font-size: 18px;
   line-height: 22px;
+  max-width: 336px;
 }
 @media (min-width: 320px) and (max-width: 768px) {
   .profile__about {
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 14px;
+    line-height: 17px;
     text-align: center;
-    max-width: 768px;
   }
 }
