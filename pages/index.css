@@ -7,3 +7,11 @@
 @import url(../blocks/photo-grid/photo-grid.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup_bigImg/__capture/popup_bigImg__capture.css);
+@import url(../blocks/popup_bigImg/__container/popup_bigImg__container.css);
+@import url(../blocks/popup_bigImg/__figure/popup_bigImg__figure.css);
+@import url(../blocks/popup_bigImg/__image/popup_bigImg__image.css);
+@import url(../blocks/popup_bigImg/_opened/popup_bigImg_opened.css);
+@import url(../blocks/photo-grid/__like/_active/photo-grid__like_active.css);
+

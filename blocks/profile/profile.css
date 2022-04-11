@@ -11,16 +11,16 @@
   align-items: center;
 }
 
-@media screen and (min-width: 768px) and (max-width: 979px) {
+@media screen and (min-width: 768px) and (max-width: 980px) {
   .profile {
-    width: calc(100% - 54px);
+    width: calc(100% - 154px);
   }
 }
 @media screen and (min-width: 320px) and (max-width: 768px) {
   .profile {
     flex-direction: column;
     margin: 42px auto 36px;
-    min-width: 282px;
+    width: 282px;
     width: calc(100% - 38px);
   }
 }
