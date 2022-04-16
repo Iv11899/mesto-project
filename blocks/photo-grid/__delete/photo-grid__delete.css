@@ -11,7 +11,7 @@
     background-color: transparent;
     opacity: 1;
     transition: opacity 0.5s ease;
-
+    cursor: pointer;
 }
 
 .photo-grid__delete:hover {
