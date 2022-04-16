@@ -4,9 +4,9 @@ const popupEdit = document.querySelector('.popup_edit')
 const imgPopup = document.querySelector('.popup_image')
 const buttonsClose = document.querySelectorAll('.popup__close');
 const submit = document.querySelector('popup__submit');
-const formElement = document.querySelector('.popup__form');
-const nameInput = formElement.querySelector('.popup__input_type_name');
-const aboutInput = formElement.querySelector('.popup__input_type_about');
+const formEdit = document.querySelector('.popup__form');
+const nameInput = formEdit.querySelector('.popup__input_type_name');
+const aboutInput = formEdit.querySelector('.popup__input_type_about');
 const placeNameInput = document.querySelector('.popup__input_place-name');
 const placeLinkInput = document.querySelector('.popup__input_place-link');
 const profileName = document.querySelector('.profile__name');
@@ -61,7 +61,7 @@ function editProfileInfo(evt) {
   popupClose(popupEdit);
 }
 
-formElement.addEventListener("submit", editProfileInfo);
+formEdit.addEventListener("submit", editProfileInfo);
 
 function openBigImg(src, title) {
   popupOpened(popupbigImg);
