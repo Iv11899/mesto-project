@@ -7,8 +7,8 @@ const submit = document.querySelector('popup__submit');
 const formElement = document.querySelector('.popup__form');
 const nameInput = formElement.querySelector('.popup__input_type_name');
 const aboutInput = formElement.querySelector('.popup__input_type_about');
-const PlacenameInput = document.querySelector('.popup__input_place-name');
-const PlacelinkInput = document.querySelector('.popup__input_place-link');
+const placeNameInput = document.querySelector('.popup__input_place-name');
+const placeLinkInput = document.querySelector('.popup__input_place-link');
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
 const popupbigImg = document.querySelector('.popup_bigImg');
@@ -40,8 +40,8 @@ function popupClose(popup) {
   popup.classList.remove("popup_opened");
 }
 
-buttonsClose.forEach(function (cl) {
-  cl.addEventListener("click", function () {
+buttonsClose.forEach(function (close) {
+  close.addEventListener("click", function () {
     const popupOpened = document.querySelector(".popup_opened");
     popupClose(popupOpened);
   });
@@ -98,12 +98,12 @@ function initCard(image, title) {
 // Создать карточку //
 function createCard(evt) {
   evt.preventDefault();
-  const name = PlacenameInput.value;
-  const link = PlacelinkInput.value;
+  const name = placeNameInput.value;
+  const link = placeLinkInput.value;
   popupClose(imgPopup);
   renderCard(link, name);
-  PlacenameInput.value = "";
-  PlacelinkInput.value = "";
+  placeNameInput.value = "";
+  placeLinkInput.value = "";
 }
 
 // Добавить карточку //
