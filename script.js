@@ -1,9 +1,8 @@
-const editProfile = document.querySelector('.profile__edit');
-const addProfile = document.querySelector('.profile__add');
-const editPopup = document.querySelector('.popup_edit')
+const profileEdit = document.querySelector('.profile__edit');
+const profileAdd = document.querySelector('.profile__add');
+const popupEdit = document.querySelector('.popup_edit')
 const imgPopup = document.querySelector('.popup_image')
-const popup = document.querySelector('.popup');
-const closeButtons = document.querySelectorAll('.popup__close');
+const buttonsClose = document.querySelectorAll('.popup__close');
 const submit = document.querySelector('popup__submit');
 const formElement = document.querySelector('.popup__form');
 const nameInput = formElement.querySelector('.popup__input_type_name');
@@ -26,13 +25,13 @@ function popupOpened(popup) {
   popup.classList.add("popup_opened");
 }
 // Открыть попап c редактированием //
-editProfile.addEventListener("click", function () {
+profileEdit.addEventListener("click", function () {
   initInfo();
-  popupOpened(editPopup);
+  popupOpened(popupEdit);
 });
 
 //Открыть попап добавления картинки //
-addProfile.addEventListener("click", function () {
+profileAdd.addEventListener("click", function () {
   popupOpened(imgPopup);
 });
 
@@ -41,7 +40,7 @@ function popupClose(popup) {
   popup.classList.remove("popup_opened");
 }
 
-closeButtons.forEach(function (cl) {
+buttonsClose.forEach(function (cl) {
   cl.addEventListener("click", function () {
     const popupOpened = document.querySelector(".popup_opened");
     popupClose(popupOpened);
@@ -59,7 +58,7 @@ function editProfileInfo(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileAbout.textContent = aboutInput.value;
-  popupClose(editPopup);
+  popupClose(popupEdit);
 }
 
 formElement.addEventListener("submit", editProfileInfo);
