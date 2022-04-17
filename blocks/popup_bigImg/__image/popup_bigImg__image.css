@@ -3,15 +3,8 @@
   max-height: 75vh;
   margin: 0;
   bottom: 0;
+
 }
-.popup_bigImg__imag:before {
-	content: '';
-	background: #000;
-	position: fixed; 
-	left: 0;
-	top: 0;
-	width: 100%; 
-	height: 100%;
-	opacity: 0.9;
-	z-index: 9999;
+.popup_bigimg{
+  background-color: rgba(0, 0, 0, 0.9);
 }
