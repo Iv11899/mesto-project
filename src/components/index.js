@@ -1,9 +1,14 @@
+import '../pages/index.css';
+import { initialCards } from './cards.js';
+import { popupOpened, popupClose } from './modal.js';
+import { enableValidation } from './validate.js';
+
 const profileEdit = document.querySelector('.profile__edit');
 const profileAdd = document.querySelector('.profile__add');
 const popupEdit = document.querySelector('.popup_edit')
 const imgPopup = document.querySelector('.popup_image')
 const buttonsClose = document.querySelectorAll('.popup__close');
-const submit = document.querySelector('popup__submit');
+const submit = document.querySelector('.popup__submit');
 const formEdit = document.querySelector('.popup__form');
 const nameInput = formEdit.querySelector('.popup__input_type_name');
 const aboutInput = formEdit.querySelector('.popup__input_type_about');
@@ -19,11 +24,12 @@ const formElementImage = document.querySelector('.popup-image__form');
 const photoTemplate = document.querySelector('#photo-item').content;
 const photoElement = photoTemplate.querySelector('.photo-grid__element').cloneNode(true);
 const photoGrid = document.querySelector('.photo-grid');
-
+const page = document.querySelector('.page');
+ 
 // Открыть попап //
-function popupOpened(popup) {
-  popup.classList.add("popup_opened");
-}
+//function popupOpened(popup) {
+//  popup.classList.add("popup_opened");
+//}
 // Открыть попап c редактированием //
 profileEdit.addEventListener("click", function () {
   initInfo();
@@ -36,9 +42,9 @@ profileAdd.addEventListener("click", function () {
 });
 
 // Закрыть попап //
-function popupClose(popup) {
-  popup.classList.remove("popup_opened");
-}
+//function popupClose(popup) {
+//  popup.classList.remove("popup_opened");
+//}
 
 buttonsClose.forEach(function (close) {
   close.addEventListener("click", function () {
@@ -117,3 +123,14 @@ formElementImage.addEventListener("submit", createCard);
 initialCards.forEach((element) => {
   renderCard(element.link, element.name);
 }); 
+
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inputErrorClass: 'popup__input-error',
+  errorClass: '.popup__input-error_active'
+}); 
+
+
