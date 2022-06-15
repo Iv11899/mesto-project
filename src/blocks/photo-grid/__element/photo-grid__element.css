@@ -1,5 +1,6 @@
 .photo-grid__element {
-  width: 282px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 282px);
   background-color: #fff;
   border-radius: 10px;
   overflow: hidden;

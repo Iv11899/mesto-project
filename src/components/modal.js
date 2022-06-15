@@ -1,28 +1,31 @@
 const page = document.querySelector('.page');
 
-// Закрыть попап по ESC //
-function popupOpened(popup) {
+
+function openPopup(popup) {
     popup.classList.add("popup_opened");
     page.addEventListener('keydown', closeEsc);
+    page.addEventListener('mousedown', clickOver);
   }
   
-  function popupClose(popup) {
+  function closePopup(popup) {
     popup.classList.remove("popup_opened");
     page.removeEventListener('keydown', closeEsc);
+    page.removeEventListener('mousedown', clickOver);
   }
-
+// Закрыть попап по ESC //
   function closeEsc(evt) {
     if (evt.key === "Escape") {
-      const popupOpened = page.querySelector(".popup_opened");
-      popupOpened && popupClose(popupOpened);
+      const openPopup = page.querySelector(".popup_opened");
+      openPopup && closePopup(openPopup);
+    }
+  }
+ // Закрыть попапы по клику на оверлей //
+  function clickOver(evt) {
+    if (evt.target.classList.contains('popup')) {
+      const openPopup = page.querySelector(".popup_opened");
+      openPopup && closePopup(openPopup);
     }
   }
 
-  // Закрыть попапы по клику на оверлей //
-page.addEventListener('mousedown', function(evt) {
-    if (evt.target.classList.contains('popup')) {
-      popupClose(evt.target);
-    };
-  });
   
-  export {popupOpened, popupClose}
+  export {openPopup, closePopup }
