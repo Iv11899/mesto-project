@@ -1,5 +1,5 @@
 import "../pages/index.css";
-import { submitCardForm } from "./cards.js";
+import { submitCardForm } from "./card";
 import { openPopup, closePopup } from "./modal.js";
 import { enableValidation } from "./validate.js";
 
