@@ -3,7 +3,7 @@ import { initCard, addNewCard, displayLikes } from "./card";
 import { openPopup, closePopup, renderFormLoading } from "./modal.js";
 import { enableValidation } from "./validate.js";
 import {profileEdit, profileAdd, popupEdit, imgPopup, buttonsClose, formEdit, nameInput, aboutInput, 
-  profileName, profileAbout, formElementImage, placeNameInput, placeLinkInput, photoGrid, profileAvatar, editAvatarButton, avatarPopup, avatarLink, profileAvatarForm, userId} from "./constants.js";
+  profileName, profileAbout, formElementImage, placeNameInput, placeLinkInput, photoGrid, profileAvatar, editAvatarButton, avatarPopup, avatarLink, profileAvatarForm, userId, editAvatarDot, editProfileDot} from "./constants.js";
 import {getUserData, getInitialCards, editUserData, changeAvatar, addCard, deleteCard, addLike, deleteLike } from './api.js'
 
 
@@ -32,7 +32,7 @@ import {getUserData, getInitialCards, editUserData, changeAvatar, addCard, delet
   //     evt.preventDefault()}
   
   function handleProfileAvatarSubmit(evt) {
-    renderFormLoading(true, editAvatarButton)
+    renderFormLoading(true, editAvatarDot)
     evt.preventDefault();
     changeAvatar(avatarLink.value)
     .then (res => {
@@ -44,6 +44,7 @@ import {getUserData, getInitialCards, editUserData, changeAvatar, addCard, delet
           console.log(err.message)
         })
         }
+        
 
 // Открыть попап c редактированием //
 profileEdit.addEventListener("click", function () {
@@ -71,12 +72,14 @@ function  initInfo() {
 
 // Обновить информацию в профиле //
 function editProfileInfo(evt) {
+  renderFormLoading(true, editProfileDot)
   evt.preventDefault();
   editUserData ( nameInput.value, aboutInput.value )
   .then (res => {
   profileName.textContent = res.name;
-  aboutInput.value = res.about;})
-  closePopup(popupEdit)
+  aboutInput.value = res.about;
+  closePopup(popupEdit)})
+
   .catch((err) => {
     console.log(err.message)
   })
@@ -117,12 +120,12 @@ export function addALike(button, cardId, likeCounter) {
 function submitCardForm(evt) {
   addCard(placeNameInput.value, placeLinkInput.value)
   .then((res) => {
-    addNewCard(res);
-  })
+  addNewCard(res);
   closePopup(imgPopup);
   renderCard(res.link, res.name);
   placeNameInput.value = "";
   placeLinkInput.value = "";
+  })
   const btn = imgPopup.querySelector('.popup__submit');
   btn.disabled = true;
   btn.classList.add('popup__submit_disabled');

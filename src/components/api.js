@@ -65,7 +65,7 @@ export const addCard = (name, link) => {
     headers: config.headers,
     body: JSON.stringify({
       name: name,
-      link: link
+      link: link,
     })
   })
   .then(checkResponse)

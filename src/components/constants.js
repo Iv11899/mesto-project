@@ -38,3 +38,5 @@ export const editAvatarButton = document.querySelector(".profile__btn-edit");
 export const avatarPopup = document.querySelector(".popup__edit_avatar");
 export const avatarLink = document.querySelector('.popup__input_avatar');
 export const profileAvatarForm = document.querySelector('.popup-avatar__form');
+export const editAvatarDot = document.querySelector('.popup__submit_avt');
+export const editProfileDot = document.querySelector('.popup-profile-submit');
