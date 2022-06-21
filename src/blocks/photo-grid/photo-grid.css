@@ -3,7 +3,10 @@
 @import url(./__info/photo-grid__info.css);
 @import url(./__title/photo-grid__title.css);
 @import url(./__like/photo-grid__like.css);
+@import url(./__like-counter/photo-grid__like-counter.css);
 @import url(./__delete/photo-grid__delete.css);
+@import url(./__delete/_active/photo-grid__delete_active.css);
+
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 282px);

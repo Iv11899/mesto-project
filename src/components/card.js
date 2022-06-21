@@ -1,9 +1,6 @@
 import { openPopup } from "./modal";
-
-const popupbigImg = document.querySelector(".popup_bigImg");
-const popupbigImgCap = document.querySelector(".popup_bigImg__capture");
-const bigImg = document.querySelector(".popup_bigImg__image");
-const photoTemplate = document.querySelector("#photo-item").content;
+import {popupbigImg, popupbigImgCap, bigImg, photoTemplate, userId, photoGrid} from './constants.js';
+import {deleteAddedCard, addALike} from './index.js'
 
 function openBigImg(src, title) {
   openPopup(popupbigImg);
@@ -12,34 +9,57 @@ function openBigImg(src, title) {
   popupbigImgCap.textContent = title;
 }
 // Добавить карточку //
-function initCard(image, title) {
+function initCard(card) {
   const photoElement = photoTemplate
     .querySelector(".photo-grid__element")
     .cloneNode(true);
-  photoElement.querySelector(".photo-grid__title").textContent = title;
+  photoElement.querySelector(".photo-grid__title").textContent = card.name;
   const photoImg = photoElement.querySelector(".photo-grid__img");
-  photoImg.src = image;
-  photoImg.alt = title;
-  photoImg.addEventListener("click", function () {
-    openBigImg(image, title);
-  });
-  const heartButton = photoElement.querySelector(".photo-grid__like");
   const deleteButton = photoElement.querySelector(".photo-grid__delete");
+  const heartButton = photoElement.querySelector(".photo-grid__like");
+  const likeCounter = photoElement.querySelector('.photo-grid__like-counter');
+  const cardId = card._id;
+
+  if(userId.id == card.owner._id) {
+    deleteButton.classList.add('photo-grid__delete_active');
+  }
+
+  card.likes.forEach((like) => {
+    if(userId.id == like._id) {
+      heartButton.classList.add('photo-grid__like_active');
+    }
+  })
+  
+
+
+  deleteAddedCard(deleteButton, photoElement, cardId);
+
+  addALike(heartButton, cardId, likeCounter)
+
+  displayLikes(likeCounter, card)
+  photoImg.src = card.link;
+  photoImg.alt = card.name;
+
+  photoImg.addEventListener("click", function () {
+    openBigImg(card.link, card.name);
+  });
 
   heartButton.addEventListener("click", likeCard);
-
-  deleteButton.addEventListener("click", deleteCard);
 
   return photoElement;
 }
 
-// Удалить карточку //
-function deleteCard(evt) {
-evt.target.closest(".photo-grid__element").remove()
-}
 // добавление лайков
 function likeCard(evt) {
   evt.target.classList.toggle("photo-grid__like_active");
 }
 
-export { initCard };
+function addNewCard(card) {
+  photoGrid.prepend(initCard(card));
+}
+
+function displayLikes (likeContainer, card) {
+  likeContainer.textContent = card.likes.length;
+}
+
+export { initCard, addNewCard, displayLikes};
