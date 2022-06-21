@@ -1,26 +1,50 @@
 import "../pages/index.css";
-import { initCard } from "./card";
-import { openPopup, closePopup } from "./modal.js";
+import { initCard, addNewCard, displayLikes } from "./card";
+import { openPopup, closePopup, renderFormLoading } from "./modal.js";
 import { enableValidation } from "./validate.js";
-import { initialCards } from "./cards.js";
-
-const profileEdit = document.querySelector(".profile__edit");
-const profileAdd = document.querySelector(".profile__add");
-const popupEdit = document.querySelector(".popup_edit");
-const imgPopup = document.querySelector(".popup_image");
-const buttonsClose = document.querySelectorAll(".popup__close");
-const formEdit = popupEdit.querySelector(".popup__form");
-const nameInput = formEdit.querySelector(".popup__input_type_name");
-const aboutInput = formEdit.querySelector(".popup__input_type_about");
-const profileName = document.querySelector(".profile__name");
-const profileAbout = document.querySelector(".profile__about");
-const formElementImage = document.querySelector(".popup-image__form");
+import {profileEdit, profileAdd, popupEdit, imgPopup, buttonsClose, formEdit, nameInput, aboutInput, 
+  profileName, profileAbout, formElementImage, placeNameInput, placeLinkInput, photoGrid, profileAvatar, editAvatarButton, avatarPopup, avatarLink, profileAvatarForm, userId, editAvatarDot, editProfileDot} from "./constants.js";
+import {getUserData, getInitialCards, editUserData, changeAvatar, addCard, deleteCard, addLike, deleteLike } from './api.js'
 
 
+  Promise.all([getUserData(), getInitialCards()])
+  .then(([data, cards]) => {
+    profileAvatar.src = data.avatar;
+    profileName.textContent = data.name;
+    profileAbout.textContent = data.about;
+    userId.id = data._id
+    cards.forEach((card) => {
+      photoGrid.append(initCard(card));
+    })
+    console.log(cards)
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
-const placeNameInput = document.querySelector(".popup__input_place-name");
-const placeLinkInput = document.querySelector(".popup__input_place-link");
-const photoGrid = document.querySelector(".photo-grid");
+  editAvatarButton.addEventListener("click", function () {
+    openPopup(avatarPopup);
+  });
+  profileAvatarForm.addEventListener("submit", handleProfileAvatarSubmit)
+
+  // function handleProfileFormSubmit(evt) {
+  //   renderLoading(true, editButtonSave)
+  //     evt.preventDefault()}
+  
+  function handleProfileAvatarSubmit(evt) {
+    renderFormLoading(true, editAvatarDot)
+    evt.preventDefault();
+    changeAvatar(avatarLink.value)
+    .then (res => {
+      console.log(res)
+      profileAvatar.src = avatarLink.value;
+          closePopup(avatarPopup)
+        })
+        .catch((err) => {
+          console.log(err.message)
+        })
+        }
+        
 
 // Открыть попап c редактированием //
 profileEdit.addEventListener("click", function () {
@@ -41,28 +65,67 @@ buttonsClose.forEach(function (close) {
 });
 
 // Установить начальные значения профиля редактирования //
-function initInfo() {
+function  initInfo() {
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
 }
 
 // Обновить информацию в профиле //
 function editProfileInfo(evt) {
+  renderFormLoading(true, editProfileDot)
   evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileAbout.textContent = aboutInput.value;
-  closePopup(popupEdit);
+  editUserData ( nameInput.value, aboutInput.value )
+  .then (res => {
+  profileName.textContent = res.name;
+  aboutInput.value = res.about;
+  closePopup(popupEdit)})
+
+  .catch((err) => {
+    console.log(err.message)
+  })
+}
+
+// Удалить карточку //
+export function deleteAddedCard(button, card, cardId) {
+  button.addEventListener('click', () => {
+    deleteCard(cardId)
+    .then(() => {
+      card.remove()
+    })
+  })
+}
+
+export function addALike(button, cardId, likeCounter) {
+  button.addEventListener('click', () => {
+    if(button.classList.contains('photo-grid__like_active')) {
+      deleteLike(cardId)
+      .then((res) => {
+        button.classList.remove('photo-grid__like_active');
+        displayLikes(likeCounter, res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })} 
+      else {
+        addLike(cardId)
+        .then((res) => {
+          button.classList.add('photo-grid__like_active');
+          displayLikes(likeCounter, res);
+        })
+      };
+  })
 }
 
 // Создать карточку //
 function submitCardForm(evt) {
-  evt.preventDefault();
-  const name = placeNameInput.value;
-  const link = placeLinkInput.value;
+  addCard(placeNameInput.value, placeLinkInput.value)
+  .then((res) => {
+  addNewCard(res);
   closePopup(imgPopup);
-  renderCard(link, name);
+  renderCard(res.link, res.name);
   placeNameInput.value = "";
   placeLinkInput.value = "";
+  })
   const btn = imgPopup.querySelector('.popup__submit');
   btn.disabled = true;
   btn.classList.add('popup__submit_disabled');
@@ -71,16 +134,8 @@ function submitCardForm(evt) {
 // Добавить карточку //
 function renderCard(image, title) {
   const card = initCard(image, title);
-  photoGrid.prepend(card);
+  photoGrid.append(card);
 }
-
-
-initialCards.forEach((element) => {
-  renderCard(element.link, element.name);
-});
-
-
-
 
 formEdit.addEventListener("submit", editProfileInfo);
 

@@ -1,5 +1,6 @@
-const page = document.querySelector('.page');
+import {page} from './constants.js'
 
+  
 
 function openPopup(popup) {
     popup.classList.add("popup_opened");
@@ -27,5 +28,12 @@ function openPopup(popup) {
     }
   }
 
+  const renderFormLoading = (isLoading, submitButton) => {
+    if(isLoading) {
+      submitButton.textContent = 'Coхранение...'
+    } else {
+      submitButton.textContent = 'Сохранить'
+    }
+  }
   
-  export {openPopup, closePopup }
+  export {openPopup, closePopup, renderFormLoading }
