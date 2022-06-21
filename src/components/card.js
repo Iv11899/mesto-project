@@ -44,7 +44,7 @@ function initCard(card) {
     openBigImg(card.link, card.name);
   });
 
-  heartButton.addEventListener("click", likeCard);
+
 
   return photoElement;
 }

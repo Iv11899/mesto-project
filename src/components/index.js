@@ -43,6 +43,9 @@ import {getUserData, getInitialCards, editUserData, changeAvatar, addCard, delet
         .catch((err) => {
           console.log(err.message)
         })
+        .finally(() => {
+          renderFormLoading(false, editAvatarDot);
+        })
         }
         
 
@@ -83,6 +86,9 @@ function editProfileInfo(evt) {
   .catch((err) => {
     console.log(err.message)
   })
+  .finally(() => {
+    renderFormLoading(false, editProfileDot);
+  })
 }
 
 // Удалить карточку //
@@ -91,6 +97,9 @@ export function deleteAddedCard(button, card, cardId) {
     deleteCard(cardId)
     .then(() => {
       card.remove()
+    })
+    .catch((err) => {
+      console.log(err.message)
     })
   })
 }
@@ -112,6 +121,9 @@ export function addALike(button, cardId, likeCounter) {
           button.classList.add('photo-grid__like_active');
           displayLikes(likeCounter, res);
         })
+        .catch((err) => {
+          console.log(err.message)
+        })
       };
   })
 }
@@ -122,20 +134,17 @@ function submitCardForm(evt) {
   .then((res) => {
   addNewCard(res);
   closePopup(imgPopup);
-  renderCard(res.link, res.name);
   placeNameInput.value = "";
   placeLinkInput.value = "";
+  })
+  .catch((err) => {
+    console.log(err.message)
   })
   const btn = imgPopup.querySelector('.popup__submit');
   btn.disabled = true;
   btn.classList.add('popup__submit_disabled');
 }
 
-// Добавить карточку //
-function renderCard(image, title) {
-  const card = initCard(image, title);
-  photoGrid.append(card);
-}
 
 formEdit.addEventListener("submit", editProfileInfo);
 

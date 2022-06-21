@@ -23,8 +23,7 @@ function openPopup(popup) {
  // Закрыть попапы по клику на оверлей //
   function clickOver(evt) {
     if (evt.target.classList.contains('popup')) {
-      const openPopup = page.querySelector(".popup_opened");
-      openPopup && closePopup(openPopup);
+      evt.target && closePopup(evt.target);
     }
   }
 
